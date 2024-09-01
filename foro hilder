@@ -1,0 +1,118 @@
+import React from 'react'
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { MessageCircle, ThumbsUp, Eye, PlusCircle } from 'lucide-react'
+
+export default function SportsForum() {
+  return (
+    <div className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6">Foro Deportivo AR</h1>
+      
+      <Tabs defaultValue="forum" className="w-full">
+        <TabsList>
+          <TabsTrigger value="forum">Foro</TabsTrigger>
+          <TabsTrigger value="create">Crear Pregunta</TabsTrigger>
+          <TabsTrigger value="ar">Vista AR</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="forum">
+          <div className="grid gap-4">
+            {[1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardHeader>
+                  <CardTitle>¿Cuál es el mejor equipo de fútbol de todos los tiempos?</CardTitle>
+                  <CardDescription>Publicado por Usuario{i} hace 2 horas</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p>He estado debatiendo con mis amigos sobre cuál es el mejor equipo de fútbol de la historia. ¿Qué opinan?</p>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Button variant="ghost" size="sm"><MessageCircle className="mr-2 h-4 w-4" /> 15</Button>
+                    <Button variant="ghost" size="sm"><ThumbsUp className="mr-2 h-4 w-4" /> 32</Button>
+                  </div>
+                  <Button variant="outline" size="sm"><Eye className="mr-2 h-4 w-4" /> Ver respuestas</Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="create">
+          <Card>
+            <CardHeader>
+              <CardTitle>Crear nueva pregunta</CardTitle>
+              <CardDescription>Comparte tu duda o tema de discusión con la comunidad</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form>
+                <div className="space-y-4">
+                  <Input placeholder="Título de tu pregunta" />
+                  <Textarea placeholder="Describe tu pregunta o tema de discusión" />
+                  <Button>
+                    <PlusCircle className="mr-2 h-4 w-4" />
+                    Publicar pregunta
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        <TabsContent value="ar">
+          <Card>
+            <CardHeader>
+              <CardTitle>Vista de Realidad Aumentada</CardTitle>
+              <CardDescription>Visualiza el estadio en 3D</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-muted aspect-video rounded-md flex items-center justify-center">
+                <p className="text-muted-foreground">Aquí se mostraría la vista AR del estadio</p>
+              </div>
+              <div className="mt-4">
+                <Button>Iniciar experiencia AR</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+      
+      <Card className="mt-8">
+        <CardHeader>
+          <CardTitle>¿Cuál es el mejor equipo de fútbol de todos los tiempos?</CardTitle>
+          <CardDescription>Publicado por Usuario1 hace 2 horas</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4">He estado debatiendo con mis amigos sobre cuál es el mejor equipo de fútbol de la historia. ¿Qué opinan?</p>
+          <div className="space-y-4">
+            {[1, 2].map((i) => (
+              <div key={i} className="flex space-x-4">
+                <Avatar>
+                  <AvatarImage src={`https://i.pravatar.cc/150?img=${i}`} />
+                  <AvatarFallback>U{i}</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <p className="font-semibold">Usuario{i}</p>
+                  <p className="text-sm text-muted-foreground">Hace {i} hora{i > 1 ? 's' : ''}</p>
+                  <p className="mt-1">En mi opinión, el mejor equipo de todos los tiempos es...</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+        <CardFooter>
+          <form className="w-full">
+            <div className="flex space-x-2">
+              <Input placeholder="Escribe tu respuesta..." className="flex-1" />
+              <Button type="submit">Responder</Button>
+            </div>
+          </form>
+        </CardFooter>
+      </Card>
+    </div>
+  )
+}
